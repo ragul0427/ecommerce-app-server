@@ -22,7 +22,11 @@ const createUser = async (req, res) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        res.cookie("token", token).status(200).send("token");
+        res.cookie("token", token, {
+          httpOnly: true,
+          path: "/",
+          maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
+        }).send(token);
       } else {
         const data = findUser._id;
         const token = await jwt.sign(
@@ -30,7 +34,11 @@ const createUser = async (req, res) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        res.cookie("token", token).status(200).send("token");
+        res.cookie("token", token, {
+          httpOnly: true,
+          path: "/",
+          maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
+        }).send(token);
         console.log(token, "register");
       }
     }
@@ -52,9 +60,11 @@ const getUser = async (req, res, next) => {
         "abcd123",
         { expiresIn: "10000h" }
       );
-      res
-        .cookie("token", token, { expires: new Date(Date.now() + 9999999) })
-        .send(token);
+      res.cookie("token", token, {
+        httpOnly: true,
+        path: "/",
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
+      }).send(token);
       console.log(token);
     } else if (password === undefined) {
       if (!findUser && password === undefined) {
@@ -67,7 +77,11 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        res.cookie("token", token).status(200).send("token");
+        res.cookie("token", token, {
+          httpOnly: true,
+          path: "/",
+          maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
+        }).send(token);
       } else {
         const data = findUser._id;
         const token = await jwt.sign(
@@ -75,7 +89,11 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        res.cookie("token", token).status(200).send("token");
+        res.cookie("token", token, {
+          httpOnly: true,
+          path: "/",
+          maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
+        }).send(token);
         console.log(token, "register");
       }
     }
