@@ -25,6 +25,7 @@ const createUser = async (req, res) => {
         res.cookie("token", token, {
           httpOnly: true,
           path: "/",
+          sameSite: 'none',
           maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
         }).send(token);
       } else {
@@ -37,7 +38,9 @@ const createUser = async (req, res) => {
         res.cookie("token", token, {
           httpOnly: true,
           path: "/",
-          maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
+          sameSite: 'none',
+          maxAge: 30 * 24 * 60 * 60 * 1000,
+           // 30days
         }).send(token);
         console.log(token, "register");
       }
@@ -63,6 +66,7 @@ const getUser = async (req, res, next) => {
       res.cookie("token", token, {
         httpOnly: true,
         path: "/",
+        sameSite: 'none',
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
       }).send(token);
       console.log(token);
@@ -80,6 +84,7 @@ const getUser = async (req, res, next) => {
         res.cookie("token", token, {
           httpOnly: true,
           path: "/",
+          sameSite: 'none',
           maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
         }).send(token);
       } else {
@@ -92,6 +97,7 @@ const getUser = async (req, res, next) => {
         res.cookie("token", token, {
           httpOnly: true,
           path: "/",
+          sameSite: 'none',
           maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
         }).send(token);
         console.log(token, "register");
