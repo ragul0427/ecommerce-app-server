@@ -8,12 +8,12 @@ const createUser = async (req, res) => {
     const findUser = await User.findOne({ email });
 
     if (!findUser && password !== undefined) {
-      console.log("enter1")
+      console.log("enter1");
       await User.create({ ...req.body });
       return res.status(200).send({ data: "Registered SuccssFully" });
     } else if (password === undefined) {
       if (!findUser && password === undefined) {
-        console.log("enter")
+        console.log("enter");
         const result = await User.create({ ...req.body });
 
         const data = result._id;
@@ -22,7 +22,14 @@ const createUser = async (req, res) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        res.cookie("token", token,{secure:true}).status(200).send("token");
+        res
+          .cookie("token", token, {
+            secure: true,
+            domain: "https://ecommerce-app-client-uguo.vercel.app",
+            path: "https://ecommerce-app-client-uguo.vercel.app/login",
+          })
+          .status(200)
+          .send("token");
       } else {
         const data = findUser._id;
         const token = await jwt.sign(
@@ -30,7 +37,14 @@ const createUser = async (req, res) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        res.cookie("token", token,{secure:true}).status(200).send("token");
+        res
+          .cookie("token", token, {
+            secure: true,
+            domain: "https://ecommerce-app-client-uguo.vercel.app",
+            path: "https://ecommerce-app-client-uguo.vercel.app/login",
+          })
+          .status(200)
+          .send("token");
         console.log(token, "register");
       }
     }
@@ -53,12 +67,17 @@ const getUser = async (req, res, next) => {
         { expiresIn: "10000h" }
       );
       res
-        .cookie("token", token, { expires: new Date(Date.now() + 9999999),secure:true})
-        .send(token);
+      .cookie("token", token, {
+        secure: true,
+        domain: "https://ecommerce-app-client-uguo.vercel.app",
+        path: "https://ecommerce-app-client-uguo.vercel.app/login",
+      })
+      .status(200)
+      .send("token");
       console.log(token);
     } else if (password === undefined) {
       if (!findUser && password === undefined) {
-        console.log("enter")
+        console.log("enter");
         const result = await User.create({ ...req.body });
 
         const data = result._id;
@@ -67,7 +86,14 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        res.cookie("token", token,{secure:true}).status(200).send("token");
+        res
+          .cookie("token", token, {
+            secure: true,
+            domain: "https://ecommerce-app-client-uguo.vercel.app",
+            path: "https://ecommerce-app-client-uguo.vercel.app/login",
+          })
+          .status(200)
+          .send("token");
       } else {
         const data = findUser._id;
         const token = await jwt.sign(
@@ -75,7 +101,14 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        res.cookie("token", token,{secure:true}).status(200).send("token");
+        res
+          .cookie("token", token, {
+            secure: true,
+            domain: "https://ecommerce-app-client-uguo.vercel.app",
+            path: "https://ecommerce-app-client-uguo.vercel.app/login",
+          })
+          .status(200)
+          .send("token");
         console.log(token, "register");
       }
     }
