@@ -51,9 +51,20 @@ const getUser = async (req, res, next) => {
         "abcd123",
         { expiresIn: "10000h" }
       );
-      res
-        .cookie("token", token, { expires: new Date(Date.now() + 9999999),secure:true})
-        .send(token);
+      res.cookie('token', token, {
+
+        maxAge: 30*24*60*60*1000,
+
+        httpOnly: true,
+
+        secure: true,
+
+        sameSite: 'None',
+
+        domain: 'https://ecommerce-app-client-silk.vercel.app', 
+
+        path: '/'
+    });
       
     } else if (password === undefined) {
       if (!findUser && password === undefined) {
@@ -66,7 +77,20 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h", }
         );
-        res.cookie("token", token,{secure:true}).status(200).send("token");
+        res.cookie('token', token, {
+
+          maxAge: 30*24*60*60*1000,
+  
+          httpOnly: true,
+  
+          secure: true,
+  
+          sameSite: 'None',
+  
+          domain: 'https://ecommerce-app-client-silk.vercel.app', 
+  
+          path: '/'
+      });
       } else {
         const data = findUser._id;
         const token = await jwt.sign(
@@ -74,7 +98,20 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        res.cookie("token", token,{secure:true}).status(200).send("token");
+        res.cookie('token', token, {
+
+          maxAge:30*24*60*60*1000,
+  
+          httpOnly: true,
+  
+          secure: true,
+  
+          sameSite: 'None',
+  
+          domain: 'https://ecommerce-app-client-silk.vercel.app', 
+  
+          path: '/'
+      });
         
       }
     }
