@@ -21,6 +21,7 @@ const createUser = async (req, res) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
+        console.log(token)
         res.cookie("token", token,{secure:true}).status(200).send("token");
       } else {
         const data = findUser._id;
@@ -29,6 +30,7 @@ const createUser = async (req, res) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
+        console.log(token)
         res.cookie("token", token,{secure:true}).status(200).send("token");
      
       }
@@ -51,6 +53,7 @@ const getUser = async (req, res, next) => {
         "abcd123",
         { expiresIn: "10000h" }
       );
+      console.log(token)
       res
         .cookie("token", token, { expires: new Date(Date.now() + 9999999),secure:true})
         .send(token);
@@ -66,6 +69,7 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h", }
         );
+        console.log(token)
         res.cookie("token", token,{secure:true}).status(200).send("token");
       } else {
         const data = findUser._id;
@@ -74,6 +78,7 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
+        console.log(token)
         res.cookie("token", token,{secure:true}).status(200).send("token");
         
       }
@@ -82,6 +87,8 @@ const getUser = async (req, res, next) => {
     console.log(e);
   }
 };
+
+
 
 module.exports = {
   createUser,
