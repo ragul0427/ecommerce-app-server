@@ -32,28 +32,3 @@ mongoose
     .catch((err) => {
         console.log(err);
     });
-
-
-    app.get("/validateToken", (req, res) => {
-        const authHeader = req.headers.cookie.split('=')[1]
-        if (!authHeader) {
-            return res.status(401).send({ error: "Unauthorized" });
-          }
-        
-          // Extract the token part from the header
-          try {
-            const decodedToken = jwt.verify(authHeader, "abcd123");
-            console.log(decodedToken)
-            res.status(200).send(decodedToken);
-          } catch (error) {
-            console.error("Token validation failed:", error);
-            res.status(401).send({ error: "Unauthorized" });
-          }
-      });
-     
-      
-      
-      
-      
-      
-      

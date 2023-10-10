@@ -7,12 +7,10 @@ const createUser = async (req, res) => {
     const findUser = await User.findOne({ email });
 
     if (!findUser && password !== undefined) {
-     
       await User.create({ ...req.body });
       return res.status(200).send({ data: "Registered Successfully" });
     } else if (password === undefined) {
       if (!findUser && password === undefined) {
-        
         const result = await User.create({ ...req.body });
 
         const data = result._id;
@@ -22,9 +20,8 @@ const createUser = async (req, res) => {
           { expiresIn: "10000h" }
         );
         console.log(token);
-        
-        // Set the token in the Authorization header
-        res.setHeader("Authorization", `Bearer ${token}`);
+
+        // Send the token in the response body
         res.status(200).send({ token });
       } else {
         const data = findUser._id;
@@ -34,11 +31,9 @@ const createUser = async (req, res) => {
           { expiresIn: "10000h" }
         );
         console.log(token);
-        
-        // Set the token in the Authorization header
-        res.setHeader("Authorization", `Bearer ${token}`);
+
+        // Send the token in the response body
         res.status(200).send({ token });
-     
       }
     }
   } catch (e) {
@@ -50,7 +45,6 @@ const createUser = async (req, res) => {
 const getUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-   
     const findUser = await User.findOne({ email });
 
     if (findUser && findUser.password == password) {
@@ -61,14 +55,11 @@ const getUser = async (req, res, next) => {
         { expiresIn: "10000h" }
       );
       console.log(token);
-      
-      // Set the token in the Authorization header
-      res.setHeader("Authorization", `Bearer ${token}`);
+
+      // Send the token in the response body
       res.status(200).send({ token });
-      
     } else if (password === undefined) {
       if (!findUser && password === undefined) {
-        
         const result = await User.create({ ...req.body });
 
         const data = result._id;
@@ -78,9 +69,8 @@ const getUser = async (req, res, next) => {
           { expiresIn: "10000h" }
         );
         console.log(token);
-        
-        // Set the token in the Authorization header
-        res.setHeader("Authorization", `Bearer ${token}`);
+
+        // Send the token in the response body
         res.status(200).send({ token });
       } else {
         const data = findUser._id;
@@ -90,9 +80,8 @@ const getUser = async (req, res, next) => {
           { expiresIn: "10000h" }
         );
         console.log(token);
-        
-        // Set the token in the Authorization header
-        res.setHeader("Authorization", `Bearer ${token}`);
+
+        // Send the token in the response body
         res.status(200).send({ token });
       }
     }
