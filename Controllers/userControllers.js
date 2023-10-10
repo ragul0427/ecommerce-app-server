@@ -9,7 +9,7 @@ const createUser = async (req, res) => {
     if (!findUser && password !== undefined) {
      
       await User.create({ ...req.body });
-      return res.status(200).send({ data: "Registered SuccssFully" });
+      return res.status(200).send({ data: "Registered Successfully" });
     } else if (password === undefined) {
       if (!findUser && password === undefined) {
         
@@ -21,8 +21,11 @@ const createUser = async (req, res) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        console.log(token)
-        res.cookie("token", token,{secure:true}).status(200).send("token");
+        console.log(token);
+        
+        // Set the token in the Authorization header
+        res.setHeader("Authorization", `Bearer ${token}`);
+        res.status(200).send({ token });
       } else {
         const data = findUser._id;
         const token = await jwt.sign(
@@ -30,13 +33,17 @@ const createUser = async (req, res) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        console.log(token)
-        res.cookie("token", token,{secure:true}).status(200).send("token");
+        console.log(token);
+        
+        // Set the token in the Authorization header
+        res.setHeader("Authorization", `Bearer ${token}`);
+        res.status(200).send({ token });
      
       }
     }
   } catch (e) {
     console.log(e);
+    res.status(500).send({ error: "Server error" });
   }
 };
 
@@ -53,10 +60,11 @@ const getUser = async (req, res, next) => {
         "abcd123",
         { expiresIn: "10000h" }
       );
-      console.log(token)
-      res
-        .cookie("token", token, { expires: new Date(Date.now() + 9999999),secure:true})
-        .send(token);
+      console.log(token);
+      
+      // Set the token in the Authorization header
+      res.setHeader("Authorization", `Bearer ${token}`);
+      res.status(200).send({ token });
       
     } else if (password === undefined) {
       if (!findUser && password === undefined) {
@@ -67,10 +75,13 @@ const getUser = async (req, res, next) => {
         const token = await jwt.sign(
           { userId: data, email: result.email },
           "abcd123",
-          { expiresIn: "10000h", }
+          { expiresIn: "10000h" }
         );
-        console.log(token)
-        res.cookie("token", token,{secure:true}).status(200).send("token");
+        console.log(token);
+        
+        // Set the token in the Authorization header
+        res.setHeader("Authorization", `Bearer ${token}`);
+        res.status(200).send({ token });
       } else {
         const data = findUser._id;
         const token = await jwt.sign(
@@ -78,17 +89,18 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        console.log(token)
-        res.cookie("token", token,{secure:true}).status(200).send("token");
+        console.log(token);
         
+        // Set the token in the Authorization header
+        res.setHeader("Authorization", `Bearer ${token}`);
+        res.status(200).send({ token });
       }
     }
   } catch (e) {
     console.log(e);
+    res.status(500).send({ error: "Server error" });
   }
 };
-
-
 
 module.exports = {
   createUser,
