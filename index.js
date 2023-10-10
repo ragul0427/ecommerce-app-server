@@ -32,3 +32,15 @@ mongoose
     .catch((err) => {
         console.log(err);
     });
+
+
+    // app.get("/validateToken", (req, res) => {
+    //    console.log(req,"ppoii")
+    //   });
+     
+      
+      
+      
+      
+      
+      

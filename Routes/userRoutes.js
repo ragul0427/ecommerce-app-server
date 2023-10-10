@@ -5,9 +5,8 @@ const authenticateUser = require('../middleWare/authenticateToken');
 
 router.post('/createUser',createUser)
 router.post('/getUser',getUser)
-router.get('/me', authenticateUser, (req, res) => {
-    console.log(req.userId)
-    res.send(req.userId);
-});
+router.get("/validateToken", authenticateUser, (req, res) => {
+    res.status(200).send(req.user);
+  });
 
 module.exports = router

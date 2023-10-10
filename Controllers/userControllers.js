@@ -19,7 +19,7 @@ const createUser = async (req, res) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        console.log(token);
+      
 
         // Send the token in the response body
         res.status(200).send({ token });
@@ -30,7 +30,7 @@ const createUser = async (req, res) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        console.log(token);
+        
 
         // Send the token in the response body
         res.status(200).send({ token });
@@ -54,7 +54,7 @@ const getUser = async (req, res, next) => {
         "abcd123",
         { expiresIn: "10000h" }
       );
-      console.log(token);
+      
 
       // Send the token in the response body
       res.status(200).send({ token });
@@ -68,7 +68,7 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        console.log(token);
+       
 
         // Send the token in the response body
         res.status(200).send({ token });
@@ -79,7 +79,7 @@ const getUser = async (req, res, next) => {
           "abcd123",
           { expiresIn: "10000h" }
         );
-        console.log(token);
+
 
         // Send the token in the response body
         res.status(200).send({ token });
